@@ -1,5 +1,5 @@
 {
-  "name": "server.js",
+  "name": "index.js",
   "version": "1.0.0",
   "description": "crud-residents",
   "main": "index.js",
