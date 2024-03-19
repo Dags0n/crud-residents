@@ -5,7 +5,7 @@ export const getResidents = (_, res) => {
 
   db.query(sql, (err, result) => {
     if (err) {
-      res.status(500).json({ message: "Something went wrong" });
+      res.status(500).json("Something went wrong");
       return;
     }
 
@@ -28,11 +28,11 @@ export const createResident = (req, res) => {
 
   db.query(sql, [values], (err) => {
     if (err) {
-      res.status(500).json({ message: "Something went wrong" });
+      res.status(500).json("Something went wrong" );
       return;
     }
 
-    res.status(201).json({ message: "Resident created" });
+    res.status(201).json("Resident created");
   });
 };
 
@@ -50,11 +50,11 @@ export const updateResident = (req, res) => {
 
   db.query(sql, [...values, req.params.cpf], (err) => {
     if (err) {
-      res.status(500).json({ message: "Something went wrong" });
+      res.status(500).json("Something went wrong");
       return;
     }
 
-    res.status(200).json({ message: "Resident updated" });
+    res.status(200).json("Resident updated");
   });
 };
 
@@ -63,10 +63,10 @@ export const deleteResident = (req, res) => {
 
   db.query(sql, [req.params.cpf], (err) => {
     if (err) {
-      res.status(500).json({ message: "Something went wrong" });
+      res.status(500).json("Something went wrong");
       return;
     }
 
-    res.status(200).json({ message: "Resident deleted" });
+    res.status(200).json("Resident deleted");
   });
 };
