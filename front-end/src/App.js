@@ -1,10 +1,11 @@
 import GlobalStyle from "./styles/global.js";
 import styled from "styled-components";
-import Form from "./components/form.js"
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/react-toastify.css"
+import Form from "./components/form.js";
+import Grid from "./components/grid.js";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const container = styled.div`
+const Container = styled.div`
   width: 100%;
   max-width: 800px;
   margin-top: 20px;
@@ -19,10 +20,11 @@ const Title = styled.h2``;
 function App() {
   return (
     <>
-      <container>
+      <Container>
         <Title>RESIDENTS</Title>
-      </container>
-      <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT}/>
+        <Form/>
+      </Container>
+      <ToastContainer autoClose={3000} position={toast.BOTTOM_LEFT}/>
       <GlobalStyle/>
     </>
   );
