@@ -57,3 +57,16 @@ export const updateResident = (req, res) => {
     res.status(200).json({ message: "Resident updated" });
   });
 };
+
+export const deleteResident = (req, res) => {
+  const sql = "DELETE FROM residents WHERE cpf = ?";
+
+  db.query(sql, [req.params.cpf], (err) => {
+    if (err) {
+      res.status(500).json({ message: "Something went wrong" });
+      return;
+    }
+
+    res.status(200).json({ message: "Resident deleted" });
+  });
+};
