@@ -20,6 +20,21 @@ const Container = styled.div`
 const Title = styled.h2``;
 
 function App() {
+  const [residents, setResidents] = useState([]);
+  const [onEdit, setOnEdit] = useState(null);
+
+  const getResidents = async () => {
+    try {
+      const response = await axios.get("http://localhost:8800");
+      setResidents(response.data.sort((a, b) => a.name.localeCompare(b.name)));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getResidents();
+  }, [setResidents]);
 
   return (
     <>
