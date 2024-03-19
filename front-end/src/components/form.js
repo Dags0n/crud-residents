@@ -8,7 +8,7 @@ const FormContainer = styled.form`
   flex-wrap: wrap;
   background-color: #fff;
   padding: 20px;
-  border-shadow: 0 0 5px #ccc;
+  box-shadow: 0 0 5px #ccc;
   border-radius: 5px;
 `;
 
@@ -18,7 +18,7 @@ const InputArea = styled.div`
 `;
 
 const Input = styled.input`
-  width: 155px;  
+  width: 107px;  
   height: 40px;
   padding: 0 10px;
   border-radius: 5px;

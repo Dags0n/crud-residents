@@ -10,7 +10,7 @@ const Table = styled.table`
   padding: 20px;
   box-shadow: 0 0 5px #ccc;
   border-radius: 5px;
-  max-width: 800px;
+  max-width: 1100px;
   margin: 20px auto;
   word-break: break-all;
 `;
@@ -26,7 +26,7 @@ export const Th = styled.th`
   padding-bottom: 5px;
   border-bottom: inset 1px #ccc;
 
-  @media (max-width: 768px) {
+  @media (max-width: 500px) {
     ${(props) => props.onlyWeb && "display: none;"}
   }
 `;
@@ -36,7 +36,7 @@ export const Td = styled.td`
   text-align: ${(props) => (props.alignCenter ? "center" : "start")};
   width: ${(props) => (props.width ? props.width : "auto")};
 
-  @media (max-width: 768px) {
+  @media (max-width: 500px) {
     ${(props) => props.onlyWeb && "display: none;"}
   }
 `;
@@ -61,18 +61,17 @@ const Grid = ({ residents }) => {
       <Tbody>
         {residents.map((item, i) => (
           <Tr key={i}>
-            <Td width="30%">{item.name}</Td>
-            <Td width="30%">{item.cpf}</Td>
-            <Td width="30%">{item.rg}</Td>
-            <Td width="30%">{item.email}</Td>
-            <Td width="30%" onlyWeb>{item.phone}</Td>
-            <Td width="30%">{item.sex}</Td>
-            <Td width="30%">{item.date_birth}</Td>
-
-            <Td alignCenter width="5%">
+            <Td width="16%">{item.name}</Td>
+            <Td width="12%">{item.cpf}</Td>
+            <Td width="12%">{item.rg}</Td>
+            <Td width="16%">{item.email}</Td>
+            <Td width="12%" onlyWeb>{item.phone}</Td>
+            <Td width="12%">{item.sex}</Td>
+            <Td width="12%">{item.date_birth}</Td>  
+            <Td alignCenter width="4%">
               <FaEdit/>
             </Td>
-            <Td alignCenter width="5%">
+            <Td alignCenter width="4%">
               <FaTrash/>
             </Td>
           </Tr>
