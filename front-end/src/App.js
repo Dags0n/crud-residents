@@ -40,7 +40,7 @@ function App() {
     <>
       <Container>
         <Title>RESIDENTS</Title>
-        <Form/>
+        <Form onEdit={onEdit} setOnEdit={setOnEdit} getResidents={getResidents}/>
         <Grid residents={residents} setResidents={setResidents} setOnEdit={setOnEdit}/>
       </Container>
       <ToastContainer autoClose={3000} position={toast.BOTTOM_LEFT}/>

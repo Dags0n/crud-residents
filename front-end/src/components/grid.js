@@ -56,6 +56,10 @@ const Grid = ({ residents, setResidents, setOnEdit }) => {
     setOnEdit(null);
   };
 
+  const handleUpdate = (cpf) => {
+    setOnEdit(cpf);
+  };
+
   return (
     <Table>
       <Thead>
@@ -83,7 +87,7 @@ const Grid = ({ residents, setResidents, setOnEdit }) => {
             <Td width="12%">{item.sex}</Td>
             <Td width="12%">{item.date_birth}</Td>  
             <Td alignCenter width="4%">
-              <FaEdit/>
+              <FaEdit onClick={() => handleUpdate(item.cpf)}/>
             </Td>
             <Td alignCenter width="4%">
               <FaTrash onClick={() => handleDelete(item.cpf)}/>
