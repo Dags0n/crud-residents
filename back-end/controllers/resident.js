@@ -1,9 +1,9 @@
 import { db } from "../db-connection.js";
 
 export const getResidents = (_, res) => {
-  const query = "SELECT * FROM residents";
+  const sql = "SELECT * FROM residents";
 
-  db.query(query, (err, result) => {
+  db.query(sql, (err, result) => {
     if (err) {
       res.status(500).json({ message: "Something went wrong" });
       return;
@@ -14,24 +14,46 @@ export const getResidents = (_, res) => {
 };
 
 export const createResident = (req, res) => {
-  const query = "INSERT INTO residents(`cpf`, `rg`, `nome`, `email`, phone, `date_birth`, `sex`) VALUES (?)";
+  const sql = "INSERT INTO residents(`cpf`, `rg`, `name`, `email`, phone, `date_birth`, `sex`) VALUES (?)";
 
   const values = [
     req.body.cpf,
     req.body.rg,
-    req.body.nome,
+    req.body.name,
     req.body.email,
     req.body.phone,
     req.body.date_birth,
     req.body.sex,
   ];
 
-  db.query(query, [values], (err, result) => {
+  db.query(sql, [values], (err, result) => {
     if (err) {
       res.status(500).json({ message: "Something went wrong" });
       return;
     }
 
     res.status(201).json({ message: "Resident created" });
+  });
+};
+
+export const updateResident = (req, res) => {
+  const sql = "UPDATE residents SET rg = ?, name = ?, email = ?, phone = ?, date_birth = ?, sex = ? WHERE cpf = ?";
+
+  const values = [
+    req.body.rg,
+    req.body.name,
+    req.body.email,
+    req.body.phone,
+    req.body.date_birth,
+    req.body.sex,
+  ];
+
+  db.query(sql, [...values, req.params.cpf], (err) => {
+    if (err) {
+      res.status(500).json({ message: "Something went wrong" });
+      return;
+    }
+
+    res.status(200).json({ message: "Resident updated" });
   });
 };
