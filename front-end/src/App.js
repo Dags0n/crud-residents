@@ -28,7 +28,7 @@ function App() {
       const response = await axios.get("http://localhost:8800");
       setResidents(response.data.sort((a, b) => a.name.localeCompare(b.name)));
     } catch (error) {
-      console.error(error);
+      toast.error(error);
     }
   };
 

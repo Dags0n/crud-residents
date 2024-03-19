@@ -25,20 +25,12 @@ export const Th = styled.th`
   text-align: start;
   padding-bottom: 5px;
   border-bottom: inset 1px #ccc;
-
-  @media (max-width: 500px) {
-    ${(props) => props.onlyWeb && "display: none;"}
-  }
 `;
 
 export const Td = styled.td`
   padding-top: 10px;
-  text-align: ${(props) => (props.alignCenter ? "center" : "start")};
+  text-align: ${(props) => (props.align ? "center" : "start")};
   width: ${(props) => (props.width ? props.width : "auto")};
-
-  @media (max-width: 500px) {
-    ${(props) => props.onlyWeb && "display: none;"}
-  }
 `;
 
 const Grid = ({ residents, setResidents, setOnEdit }) => {
@@ -49,15 +41,15 @@ const Grid = ({ residents, setResidents, setOnEdit }) => {
       const newResidents = residents.filter((resident) => resident.cpf !== cpf);
 
       setResidents(newResidents);
-      toast.success(data.message);
+      toast.success(data);
 
-    }).catch(({ data }) => toast.error(data.message));
+    }).catch(({ data }) => toast.error(data));
 
     setOnEdit(null);
   };
 
-  const handleUpdate = (cpf) => {
-    setOnEdit(cpf);
+  const handleUpdate = (item) => {
+    setOnEdit(item);
   };
 
   return (
@@ -68,7 +60,7 @@ const Grid = ({ residents, setResidents, setOnEdit }) => {
           <Th>CPF</Th>
           <Th>RG</Th>
           <Th>Email</Th>
-          <Th onlyWeb>Phone</Th>
+          <Th>Phone</Th>
           <Th>Sex</Th>
           <Th>Birthdate</Th>
           <Th></Th>
@@ -83,13 +75,13 @@ const Grid = ({ residents, setResidents, setOnEdit }) => {
             <Td width="12%">{item.cpf}</Td>
             <Td width="12%">{item.rg}</Td>
             <Td width="16%">{item.email}</Td>
-            <Td width="12%" onlyWeb>{item.phone}</Td>
+            <Td width="12%">{item.phone}</Td>
             <Td width="12%">{item.sex}</Td>
             <Td width="12%">{item.date_birth}</Td>  
-            <Td alignCenter width="4%">
+            <Td align="center" width="4%">
               <FaEdit onClick={() => handleUpdate(item.cpf)}/>
             </Td>
-            <Td alignCenter width="4%">
+            <Td align="center" width="4%">
               <FaTrash onClick={() => handleDelete(item.cpf)}/>
             </Td>
           </Tr>

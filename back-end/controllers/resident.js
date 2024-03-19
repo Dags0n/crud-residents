@@ -14,7 +14,7 @@ export const getResidents = (_, res) => {
 };
 
 export const createResident = (req, res) => {
-  const sql = "INSERT INTO residents(`cpf`, `rg`, `name`, `email`, phone, `date_birth`, `sex`) VALUES (?)";
+  const sql = "INSERT INTO `crud-residents`.`residents` (`cpf`, `rg`, `name`, `email`, `phone`, `date_birth`, `sex`) VALUES (?);";
 
   const values = [
     req.body.cpf,
@@ -26,7 +26,7 @@ export const createResident = (req, res) => {
     req.body.sex,
   ];
 
-  db.query(sql, [values], (err, result) => {
+  db.query(sql, [values], (err) => {
     if (err) {
       res.status(500).json({ message: "Something went wrong" });
       return;
@@ -37,7 +37,9 @@ export const createResident = (req, res) => {
 };
 
 export const updateResident = (req, res) => {
-  const sql = "UPDATE residents SET rg = ?, name = ?, email = ?, phone = ?, date_birth = ?, sex = ? WHERE cpf = ?";
+  const sql = "UPDATE `crud-residents`.`residents` SET `rg` = '?, `name` = ?, `email` = ?, `phone` = ?, `date_birth` = ?, `sex` = ? WHERE (`cpf` = ?);";
+  
+
 
   const values = [
     req.body.rg,

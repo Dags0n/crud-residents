@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const FormContainer = styled.form`
   display: flex;
@@ -39,7 +41,7 @@ const Button = styled.button`
 `;
 
 
-const Form = ({ onEdit }) => {
+const Form = ({ onEdit, setOnEdit, getResidents }) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -47,6 +49,7 @@ const Form = ({ onEdit }) => {
       const resident = ref.current;
 
       resident.name.value = onEdit.name;
+      resident.cpf.value = onEdit.cpf;
       resident.email.value = onEdit.email;
       resident.phone.value = onEdit.phone;
       resident.rg.value = onEdit.rg;
@@ -55,8 +58,63 @@ const Form = ({ onEdit }) => {
     }
   }, [onEdit]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const resident = ref.current;
+
+    if(
+      !resident.name.value || 
+      !resident.cpf.value || 
+      !resident.email.value || 
+      !resident.phone.value || 
+      !resident.rg.value || 
+      !resident.date_birth.value || 
+      !resident.sex.value
+    ) {
+      return toast.warn("Fill in all fields");
+    };
+
+    if (onEdit) {
+      await axios.put(`http://localhost:8800/${onEdit.cpf}`, {
+        name: resident.name.value,
+        cpf: resident.cpf.value,
+        email: resident.email.value,
+        phone: resident.phone.value,
+        rg: resident.rg.value,
+        date_birth: resident.date_birth.value,
+        sex: resident.sex.value,
+      })
+      .then(({ data }) => toast.success(data))
+      .catch(({ data }) => toast.error(data));
+    } else {
+      await axios.post("http://localhost:8800", {
+        name: resident.name.value,
+        cpf: resident.cpf.value,
+        email: resident.email.value,
+        phone: resident.phone.value,
+        rg: resident.rg.value,
+        date_birth: resident.date_birth.value,
+        sex: resident.sex.value
+      })
+      .then(({ data }) => toast.success(data))
+      .catch(({ data }) => toast.error(data));
+    };
+
+    resident.name.value = "";
+    resident.cpf.value = "";
+    resident.email.value = "";
+    resident.phone.value = "";
+    resident.rg.value = "";
+    resident.date_birth.value = "";
+    resident.sex.value = "";
+
+    setOnEdit(null);
+    getResidents();
+  };
+
   return (
-    <FormContainer ref={ref}>
+    <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
         <Label>Name</Label>
         <Input name="name" />
