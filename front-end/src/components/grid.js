@@ -41,7 +41,21 @@ export const Td = styled.td`
   }
 `;
 
-const Grid = ({ residents }) => {
+const Grid = ({ residents, setResidents, setOnEdit }) => {
+
+  const handleDelete = async (cpf) => {
+    await axios.delete(`http://localhost:8800/${cpf}`).then(({ data }) => {
+      
+      const newResidents = residents.filter((resident) => resident.cpf !== cpf);
+
+      setResidents(newResidents);
+      toast.success(data.message);
+
+    }).catch(({ data }) => toast.error(data.message));
+
+    setOnEdit(null);
+  };
+
   return (
     <Table>
       <Thead>
@@ -72,7 +86,7 @@ const Grid = ({ residents }) => {
               <FaEdit/>
             </Td>
             <Td alignCenter width="4%">
-              <FaTrash/>
+              <FaTrash onClick={() => handleDelete(item.cpf)}/>
             </Td>
           </Tr>
         ))}

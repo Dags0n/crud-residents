@@ -41,7 +41,7 @@ function App() {
       <Container>
         <Title>RESIDENTS</Title>
         <Form/>
-        <Grid residents={residents}/>
+        <Grid residents={residents} setResidents={setResidents} setOnEdit={setOnEdit}/>
       </Container>
       <ToastContainer autoClose={3000} position={toast.BOTTOM_LEFT}/>
       <GlobalStyle/>
