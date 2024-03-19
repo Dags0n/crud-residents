@@ -78,7 +78,6 @@ const Form = ({ onEdit, setOnEdit, getResidents }) => {
     if (onEdit) {
       await axios.put(`http://localhost:8800/${onEdit.cpf}`, {
         name: resident.name.value,
-        cpf: resident.cpf.value,
         email: resident.email.value,
         phone: resident.phone.value,
         rg: resident.rg.value,

@@ -37,9 +37,7 @@ export const createResident = (req, res) => {
 };
 
 export const updateResident = (req, res) => {
-  const sql = "UPDATE `crud-residents`.`residents` SET `rg` = '?, `name` = ?, `email` = ?, `phone` = ?, `date_birth` = ?, `sex` = ? WHERE (`cpf` = ?);";
-  
-
+  const sql = "UPDATE `crud-residents`.`residents` SET `rg` = ?, `name` = ?, `email` = ?, `phone` = ?, `date_birth` = ?, `sex` = ? WHERE `cpf` = ?;";
 
   const values = [
     req.body.rg,

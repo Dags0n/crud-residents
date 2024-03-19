@@ -79,7 +79,7 @@ const Grid = ({ residents, setResidents, setOnEdit }) => {
             <Td width="12%">{item.sex}</Td>
             <Td width="12%">{item.date_birth}</Td>  
             <Td align="center" width="4%">
-              <FaEdit onClick={() => handleUpdate(item.cpf)}/>
+              <FaEdit onClick={() => handleUpdate(item)}/>
             </Td>
             <Td align="center" width="4%">
               <FaTrash onClick={() => handleDelete(item.cpf)}/>
